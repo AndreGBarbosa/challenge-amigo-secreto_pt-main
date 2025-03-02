@@ -16,11 +16,12 @@
 }
 
 body {
-    height: 100vh;
+    min-height: 100vh;
     background-color: var(--color-primary);
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: "Inter", sans-serif;
 }
 
 .main-content {
@@ -28,6 +29,7 @@ body {
     flex-direction: column;
     height: 100%;
     width: 100%;
+    max-width: 800px; /* Limita o tamanho máximo para telas maiores */
 }
 
 /* Banner */
@@ -59,10 +61,10 @@ body {
     font-weight: 900;
     font-style: italic;
     color: var(--color-white);
+    text-align: center;
 }
 
 .section-title {
-    font-family: "Inter", serif;
     font-size: 36px;
     font-weight: 700;
     color: var(--color-primary);
@@ -87,11 +89,6 @@ body {
     font-size: 16px;
 }
 
-.button-container {
-    width: 300px;
-    justify-content: center;
-}
-
 /* Estilos de entrada de texto */
 .input-title {
     flex: 1;
@@ -104,10 +101,9 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* Estilos de botão */
+/* Botões */
 button {
     padding: 15px 30px;
-    font-family: "Inter", sans-serif;
     font-size: 16px;
     border: 2px solid #000;
     border-radius: 25px;
@@ -129,7 +125,6 @@ button {
 ul {
     list-style-type: none;
     color: var(--color-text);
-    font-family: "Inter", sans-serif;
     font-size: 18px;
     margin: 20px 0;
 }
@@ -142,21 +137,90 @@ ul {
     text-align: center;
 }
 
-/* Botão de sortear título */
+/* Botão de sortear */
 .button-draw {
     display: flex;
     align-items: center;
+    justify-content: center;
     width: 100%;
-    padding: 10px 40px;
+    padding: 15px 30px;
     color: var(--color-white);
     background-color: var(--color-button);
-    font-size: 16px;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 10px;
 }
 
 .button-draw img {
-    margin-right: 40px;
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
 }
 
 .button-draw:hover {
     background-color: var(--color-button-hover);
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 32px;
+    }
+
+    .section-title {
+        font-size: 28px;
+    }
+
+    .input-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .input-title, .input-name {
+        width: 100%;
+        border-radius: 10px;
+        margin-bottom: 10px;
+    }
+
+    .button-container {
+        width: 100%;
+        text-align: center;
+    }
+
+    .button-add {
+        width: 100%;
+        border-radius: 10px;
+    }
+
+    .button-draw {
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+
+    ul {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-title {
+        font-size: 24px;
+    }
+
+    .section-title {
+        font-size: 22px;
+    }
+
+    .input-wrapper {
+        width: 90%;
+    }
+
+    .button-draw {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+
+    .result-list {
+        font-size: 18px;
+    }
 }
