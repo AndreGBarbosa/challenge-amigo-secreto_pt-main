@@ -1,3 +1,69 @@
+// Array que armazena os nomes dos amigos
+let amigos = [];
+
+// Array que registra os nomes que já foram sorteados
+let sorteados = [];
+
+// Array que registra os sorteadores que já realizaram o sorteio
+let sorteadoresJaRealizaram = [];
+
+// Variável para controlar se o cadastro foi finalizado
+let cadastroFinalizado = false;
+
+// Função para adicionar um amigo
+function adicionarAmigo() {
+  if (cadastroFinalizado) {
+    alert("Cadastro finalizado! Agora só é possível sortear.");
+    return;
+  }
+
+  const inputAmigo = document.getElementById("amigo");
+  const nome = inputAmigo.value.trim();
+
+  if (nome === "") {
+    alert("Por favor, insira um nome.");
+    return;
+  }
+
+  amigos.push(nome);
+  atualizarListaAmigos();
+  inputAmigo.value = "";
+}
+
+// Função para atualizar a lista exibida na tela
+function atualizarListaAmigos() {
+  const lista = document.getElementById("listaAmigos");
+  lista.innerHTML = "";
+  
+  for (let i = 0; i < amigos.length; i++) {
+    const li = document.createElement("li");
+    li.textContent = amigos[i];
+    lista.appendChild(li);
+  }
+}
+
+// Adiciona o listener para acionar a função ao pressionar Enter no campo de entrada
+const inputAmigo = document.getElementById("amigo");
+inputAmigo.addEventListener("keyup", function(event) {
+  if (event.key === "Enter") {
+    adicionarAmigo();
+  }
+});
+
+// Função para finalizar o cadastro e bloquear a adição de novos amigos
+function finalizarCadastro() {
+  if (amigos.length === 0) {
+    alert("Adicione pelo menos um amigo antes de finalizar o cadastro.");
+    return;
+  }
+
+  if (confirm("Todos já foram cadastrados?")) {
+    cadastroFinalizado = true;
+    document.getElementById("botaoAdicionar").disabled = true; // Desativa o botão de adicionar
+    document.getElementById("amigo").disabled = true; // Desativa o campo de input
+  }
+}
+
 // Função para sortear um amigo
 function sortearAmigo() {
   // Verifica se o cadastro foi finalizado
@@ -6,6 +72,12 @@ function sortearAmigo() {
     if (!confirmarCadastro) {
       alert("Finalize o cadastro antes de sortear.");
       return;
+    } else {
+      // Se o cadastro foi finalizado, desabilita o botão de adicionar e o campo de entrada
+      cadastroFinalizado = true;
+      document.getElementById("botaoAdicionar").disabled = true; // Desativa o botão de adicionar
+      document.getElementById("amigo").disabled = true; // Desativa o campo de input
+      alert("Cadastro finalizado! Agora você pode sortear.");
     }
   }
 
@@ -73,3 +145,4 @@ function sortearAmigo() {
     }, 10000); // Exibe a mensagem após o último sorteio
   }
 }
+
